@@ -1,537 +1,318 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Advisory, Investments, Tech, Research.">
-
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-  <title>Gupta</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="shortcut icon" href="assets/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="manifest" href="site.webmanifest">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --navy: #071b4d;
-      --gold: #c58b1c;
-      --muted: #7a7f8a;
-      --page-pad: clamp(24px, 5vw, 64px);
-    }
-
-    html,
-    body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-    }
-
-    body {
-      color: #0a0a0a;
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-
-      /*
-       * The body itself never scrolls.
-       * Only <main> scrolls.
-       */
-      overflow: hidden;
-    }
-
-    /* =========================================================
-       PAGE
-       ========================================================= */
-
-    .page {
-      width: 100%;
-      height: 100svh;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* =========================================================
-       FIXED HEADER
-       ========================================================= */
-
-    .header {
-      position: fixed;
-      z-index: 100;
-      top: 0;
-      left: 0;
-      right: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      padding:
-        calc(env(safe-area-inset-top) + 26px)
-        var(--page-pad)
-        26px;
-
-      pointer-events: none;
-    }
-
-    .brand,
-    .descriptor {
-      pointer-events: auto;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-
-      text-decoration: none;
-      color: inherit;
-
-      min-width: 0;
-    }
-
-    .brand-mark {
-      width: clamp(34px, 4vw, 42px);
-      height: clamp(34px, 4vw, 42px);
-
-      flex: 0 0 auto;
-
-      object-fit: contain;
-      display: block;
-    }
-
-    .domain {
-      font-size: clamp(14px, 1.4vw, 16px);
-      line-height: 1;
-
-      font-weight: 500;
-      letter-spacing: -0.02em;
-
-      white-space: nowrap;
-    }
-
-    .descriptor {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      color: var(--gold);
-
-      font-size: 10px;
-      line-height: 1;
-
-      font-weight: 600;
-      letter-spacing: .18em;
-
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .descriptor .dot {
-      width: 4px;
-      height: 4px;
-
-      border-radius: 50%;
-      background: var(--gold);
-
-      flex: 0 0 auto;
-    }
-    
-    main {
-      width: 100%;
-      height: 100svh;
-
-      overflow-y: auto;
-      overflow-x: hidden;
-
-      scroll-behavior: smooth;
-      overscroll-behavior-y: contain;
-
-      -webkit-overflow-scrolling: touch;
-
-      padding-top:
-        calc(env(safe-area-inset-top) + 110px);
-
-      padding-right: var(--page-pad);
-
-      padding-bottom:
-        calc(env(safe-area-inset-bottom) + 110px);
-
-      padding-left: var(--page-pad);
-
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-    main::-webkit-scrollbar {
-      display: none;
-    }
-
-    .hero {
-      width: min(100%, 920px);
-
-      min-height: calc(100svh - 220px);
-
-      margin: 0 auto;
-
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-      justify-content: center;
-
-      text-align: center;
-    }
-
-    .hero-mark {
-      width: clamp(62px, 8vw, 92px);
-      height: clamp(62px, 8vw, 92px);
-
-      object-fit: contain;
-      display: block;
-
-      margin-bottom: clamp(28px, 4.5vh, 48px);
-    }
-
-    .quote {
-      margin: 0;
-
-      max-width: 900px;
-
-      font-size: clamp(44px, 7.1vw, 88px);
-
-      font-weight: 400;
-
-      line-height: .98;
-
-      letter-spacing: -.058em;
-
-      text-wrap: balance;
-    }
-
-    .subline {
-      margin:
-        clamp(34px, 5vh, 54px)
-        0
-        0;
-
-      color: var(--navy);
-
-      font-size: clamp(10px, 1.2vw, 12px);
-
-      line-height: 1.4;
-
-      font-weight: 500;
-
-      letter-spacing: .17em;
-
-      text-transform: uppercase;
-    }
-
-    .subline span {
-      color: var(--gold);
-      padding: 0 .45em;
-    }
-
-    .scroll-space {
-      height: 80vh;
-      min-height: 300px;
-    }
-
-    .footer {
-      position: fixed;
-      z-index: 100;
-
-      left: 0;
-      right: 0;
-      bottom: 0;
-
-      display: flex;
-
-      justify-content: space-between;
-      align-items: flex-end;
-
-      gap: 20px;
-
-      padding:
-        26px
-        var(--page-pad)
-        calc(env(safe-area-inset-bottom) + 26px);
-
-      color: var(--muted);
-
-      font-size: 12px;
-      line-height: 1.4;
-
-      letter-spacing: -.01em;
-
-      pointer-events: none;
-    }
-
-    .footer .year {
-      white-space: nowrap;
-    }
-
-    @media (max-width: 700px) {
-
-      :root {
-        --page-pad: 20px;
-      }
-
-      .header {
-        padding-left: max(20px, var(--page-pad));
-        padding-right: max(20px, var(--page-pad));
-      }
-
-      .footer {
-        padding-left: max(20px, var(--page-pad));
-        padding-right: max(20px, var(--page-pad));
-      }
-
-      .descriptor {
-        display: none;
-      }
-
-      main {
-        padding-top: 100px;
-        padding-bottom: 90px;
-
-        padding-left: max(20px, var(--page-pad));
-        padding-right: max(20px, var(--page-pad));
-      }
-
-      .hero {
-        min-height: calc(100svh - 190px);
-      }
-
-      .hero-mark {
-        margin-bottom: 30px;
-      }
-
-      .quote {
-        max-width: 12ch;
-
-        font-size: clamp(42px, 12.8vw, 64px);
-
-        line-height: 1.01;
-
-        letter-spacing: -.055em;
-      }
-
-      .subline {
-        max-width: 300px;
-
-        line-height: 1.8;
-      }
-
-      .scroll-space {
-        height: 70vh;
-        min-height: 260px;
-      }
-    }
-
-    @media (max-height: 650px) and (min-width: 701px) {
-
-      .hero-mark {
-        margin-bottom: 18px;
-      }
-
-      .subline {
-        margin-top: 22px;
-      }
-
-      .scroll-space {
-        height: 60vh;
-      }
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-
-      .hero-mark {
-        animation:
-          mark-in
-          900ms
-          cubic-bezier(.16, 1, .3, 1)
-          both;
-      }
-
-      .quote {
-        animation:
-          quote-in
-          950ms
-          90ms
-          cubic-bezier(.16, 1, .3, 1)
-          both;
-      }
-
-      .subline {
-        animation:
-          fade-in
-          700ms
-          220ms
-          ease
-          both;
-      }
-    }
-
-    @keyframes mark-in {
-
-      from {
-        opacity: 0;
-        transform:
-          translateY(10px)
-          scale(.96);
-      }
-
-      to {
-        opacity: 1;
-        transform:
-          translateY(0)
-          scale(1);
-      }
-    }
-
-    @keyframes quote-in {
-
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fade-in {
-
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-  </style>
-</head>
-
-<body>
-
-  <div class="page">
-
-    <header class="header">
-
-      <a
-        class="brand"
-        href="/"
-        aria-label="Gupta.si home"
-      >
-        <img
-          class="brand-mark"
-          src="assets/gupta-mark.png"
-          alt="Gupta mark"
-          width="42"
-          height="42"
-        >
-
-        <span class="domain">
-          gupta.si
-        </span>
-      </a>
-
-      <div
-        class="descriptor"
-        aria-label="Gupta services"
-      >
-        <span>
-          < Advisory · Investments · Tech · Research
-        </span>
-      </div>
-
-    </header>
-
-    <main>
-
-      <section
-        class="hero"
-        aria-labelledby="hero-quote"
-      >
-
-        <img
-          class="hero-mark"
-          src="assets/gupta-mark.png"
-          alt="Gupta logo mark"
-          width="92"
-          height="92"
-        >
-
-        <h1
-          id="hero-quote"
-          class="quote"
-        >
-          The impossible is usually just the unexplored.
-        </h1>
-
-        <p class="subline">
-          Advisory
-          <span>|</span>
-          Investments
-          <span>|</span>
-          Tech
-          <span>|</span>
-          Research
-        </p>
-
-      </section>
-
-      <!--
-        Extra space makes the center content scrollable.
-        Header and footer remain completely fixed.
-      -->
-      <div
-        class="scroll-space"
-        aria-hidden="true"
-      ></div>
-
-    </main>
-
-    <footer class="footer">
-
-      <span>
-        Namaste
-      </span>
-
-      <span class="year">
-        © 2026
-      </span>
-
-    </footer>
-
-  </div>
-
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="description" content="Advisory, Investments, Tech, Research." />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <title>Gupta</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+        <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+        <link rel="shortcut icon" href="assets/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+        <link rel="manifest" href="site.webmanifest" />
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            :root {
+                --navy: #071b4d;
+                --gold: #c58b1c;
+                --muted: #7a7f8a;
+                --page-pad: clamp(24px, 5vw, 64px);
+            }
+            html {
+                margin: 0;
+                width: 100%;
+                min-height: 100%;
+                background: #fff;
+                overscroll-behavior-y: auto;
+            }
+            body {
+                margin: 0;
+                width: 100%;
+                min-height: 100%;
+                background: #fff;
+                color: #0a0a0a;
+                font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+                -webkit-font-smoothing: antialiased;
+                text-rendering: optimizeLegibility;
+                overflow-x: hidden;
+                overflow-y: auto;
+                overscroll-behavior-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .page {
+                width: 100%;
+                min-height: 100svh;
+                position: relative;
+            }
+            .header {
+                position: fixed;
+                z-index: 100;
+                top: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+                padding: calc(env(safe-area-inset-top) + 26px) var(--page-pad) 26px;
+                pointer-events: none;
+            }
+            .brand,
+            .descriptor {
+                pointer-events: auto;
+            }
+            .brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                text-decoration: none;
+                color: inherit;
+                min-width: 0;
+            }
+            .brand-mark {
+                width: clamp(34px, 4vw, 42px);
+                height: clamp(34px, 4vw, 42px);
+                flex: 0 0 auto;
+                object-fit: contain;
+                display: block;
+            }
+            .domain {
+                font-size: clamp(14px, 1.4vw, 16px);
+                line-height: 1;
+                font-weight: 500;
+                letter-spacing: -0.02em;
+                white-space: nowrap;
+            }
+            .descriptor {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                color: var(--gold);
+                font-size: 10px;
+                line-height: 1;
+                font-weight: 600;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                white-space: nowrap;
+            }
+            .descriptor .dot {
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: var(--gold);
+                flex: 0 0 auto;
+            }
+            main {
+                width: 100%;
+                min-height: 100svh;
+                overflow: visible;
+                padding-top: calc(env(safe-area-inset-top) + 110px);
+                padding-right: var(--page-pad);
+                padding-bottom: calc(env(safe-area-inset-bottom) + 110px);
+                padding-left: var(--page-pad);
+            }
+            .hero {
+                width: min(100%, 920px);
+                min-height: calc(100svh - 220px);
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            .hero-mark {
+                width: clamp(62px, 8vw, 92px);
+                height: clamp(62px, 8vw, 92px);
+                object-fit: contain;
+                display: block;
+                margin-bottom: clamp(28px, 4.5vh, 48px);
+            }
+            .quote {
+                margin: 0;
+                max-width: 900px;
+                font-size: clamp(44px, 7.1vw, 88px);
+                font-weight: 400;
+                line-height: 0.98;
+                letter-spacing: -0.058em;
+                text-wrap: balance;
+            }
+            .subline {
+                margin: clamp(34px, 5vh, 54px) 0 0;
+                color: var(--navy);
+                font-size: clamp(10px, 1.2vw, 12px);
+                line-height: 1.4;
+                font-weight: 500;
+                letter-spacing: 0.17em;
+                text-transform: uppercase;
+            }
+            .subline span {
+                color: var(--gold);
+                padding: 0 0.45em;
+            }
+            .scroll-space {
+                height: 100vh;
+                min-height: 400px;
+            }
+            .footer {
+                position: fixed;
+                z-index: 100;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                gap: 20px;
+                padding: 26px var(--page-pad) calc(env(safe-area-inset-bottom) + 26px);
+                color: var(--muted);
+                font-size: 12px;
+                line-height: 1.4;
+                letter-spacing: -0.01em;
+                pointer-events: none;
+            }
+            .footer .year {
+                white-space: nowrap;
+            }
+            @media (max-width: 700px) {
+                :root {
+                    --page-pad: 20px;
+                }
+                .header {
+                    padding-left: max(20px, var(--page-pad));
+                    padding-right: max(20px, var(--page-pad));
+                }
+                .footer {
+                    padding-left: max(20px, var(--page-pad));
+                    padding-right: max(20px, var(--page-pad));
+                }
+                .descriptor {
+                    display: none;
+                }
+                main {
+                    padding-top: 100px;
+                    padding-bottom: 90px;
+                    padding-left: max(20px, var(--page-pad));
+                    padding-right: max(20px, var(--page-pad));
+                }
+                .hero {
+                    min-height: calc(100svh - 190px);
+                }
+                .hero-mark {
+                    margin-bottom: 30px;
+                }
+                .quote {
+                    max-width: 12ch;
+                    font-size: clamp(42px, 12.8vw, 64px);
+                    line-height: 1.01;
+                    letter-spacing: -0.055em;
+                }
+                .subline {
+                    max-width: 300px;
+                    line-height: 1.8;
+                }
+                .scroll-space {
+                    height: 70vh;
+                    min-height: 260px;
+                }
+            }
+            @media (max-height: 650px) and (min-width: 701px) {
+                .hero-mark {
+                    margin-bottom: 18px;
+                }
+                .subline {
+                    margin-top: 22px;
+                }
+                .scroll-space {
+                    height: 60vh;
+                }
+            }
+            @media (prefers-reduced-motion: no-preference) {
+                .hero-mark {
+                    animation: mark-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+                }
+                .quote {
+                    animation: quote-in 950ms 90ms cubic-bezier(0.16, 1, 0.3, 1) both;
+                }
+                .subline {
+                    animation: fade-in 700ms 220ms ease both;
+                }
+            }
+            @keyframes mark-in {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px) scale(0.96);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+            @keyframes quote-in {
+                from {
+                    opacity: 0;
+                    transform: translateY(14px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes fade-in {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <header class="header">
+                <a class="brand" href="/" aria-label="Gupta.si home">
+                    <img class="brand-mark" src="assets/gupta-mark.png" alt="Gupta mark" width="42" height="42" />
+
+                    <span class="domain"> gupta.si </span>
+                </a>
+
+                <div class="descriptor" aria-label="Gupta services">
+                    <span> Advisory · Investments · Tech · Research </span>
+                </div>
+            </header>
+
+            <main>
+                <section class="hero" aria-labelledby="hero-quote">
+                    <img class="hero-mark" src="assets/gupta-mark.png" alt="Gupta logo mark" width="92" height="92" />
+
+                    <h1 id="hero-quote" class="quote">The impossible is usually just the unexplored.</h1>
+
+                    <p class="subline">
+                        Advisory
+                        <span>|</span>
+                        Investments
+                        <span>|</span>
+                        Tech
+                        <span>|</span>
+                        Research
+                    </p>
+                </section>
+
+                <div class="scroll-space" aria-hidden="true"></div>
+            </main>
+
+            <footer class="footer">
+                <span> Namaste </span>
+
+                <span class="year"> © 2026 </span>
+            </footer>
+        </div>
+    </body>
 </html>
