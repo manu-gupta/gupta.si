@@ -36,9 +36,15 @@ button,a{touch-action:manipulation}
 .mobile-menu{display:none}
 
 .hero{
-  min-height:100svh;padding:150px var(--pad) 90px;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,45vw);
-  gap:5vw;align-items:center;max-width:var(--content);margin:auto
+  min-height:100svh;
+  box-sizing:border-box;
+  padding:120px var(--pad) 70px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,45vw);
+  gap:5vw;
+  align-items:center;
+  max-width:var(--content);
+  margin:auto;
 }
 .hero-copy{max-width:820px}
 .eyebrow{
