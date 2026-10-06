@@ -1,5 +1,17 @@
 (() => {
- const btn=document.querySelector(".menu-toggle"),menu=document.querySelector(".mobile-menu");if(!btn||!menu)return;
- btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",open);btn.setAttribute("aria-label",open?"Close navigation":"Open navigation");menu.setAttribute("aria-hidden",!open)});
- menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{menu.classList.remove("open");btn.setAttribute("aria-expanded","false");btn.setAttribute("aria-label","Open navigation")}));
+    const b = document.querySelector('.menu-toggle'),
+        m = document.querySelector('.mobile-menu');
+    if (!b || !m) return;
+    b.onclick = () => {
+        const o = m.classList.toggle('open');
+        b.setAttribute('aria-expanded', o);
+        m.setAttribute('aria-hidden', !o);
+        document.body.style.overflow = o ? 'hidden' : ''
+    };
+    m.querySelectorAll('a').forEach(a => a.onclick = () => {
+        m.classList.remove('open');
+        b.setAttribute('aria-expanded', 'false');
+        m.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = ''
+    })
 })();
